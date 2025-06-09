@@ -3,94 +3,551 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Filosofía de Parménides</title>
+    <title>Parménides: La Filosofía del Ser Eterno</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
-        header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 15px;
-            text-align: center;
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #2d2d5f 100%);
+            color: #fff;
+            overflow-x: hidden;
         }
-        nav {
-            background-color: #f2f2f2;
-            overflow: hidden;
-        }
-        nav a {
-            float: left;
-            display: block;
-            color: #333;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-        }
-        nav a:hover {
-            background-color: #ddd;
-        }
-        .main {
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
             padding: 20px;
         }
-        .sidebar {
-            float: right;
-            width: 25%;
-            background-color: #f9f9f9;
-            padding: 20px;
+
+        /* Animaciones */
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(255, 215, 0, 0.7); }
         }
-        footer {
-            background-color: #4CAF50;
-            color: white;
+
+        /* Header */
+        .header {
             text-align: center;
-            padding: 10px;
-            position: fixed;
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
             bottom: 0;
-            width: 100%;
+            background: radial-gradient(circle at center, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+        }
+
+        .title {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ffd700, #ffed4e, #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #b8b8d4;
+            margin-bottom: 40px;
+        }
+
+        /* Navegación interactiva */
+        .nav-pills {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .nav-pill {
+            padding: 15px 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-pill:hover {
+            background: rgba(255, 215, 0, 0.2);
+            border-color: #ffd700;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+        }
+
+        .nav-pill.active {
+            background: rgba(255, 215, 0, 0.3);
+            border-color: #ffd700;
+        }
+
+        /* Secciones de contenido */
+        .content-section {
+            display: none;
+            margin: 40px 0;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: #ffd700;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .philosophy-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 215, 0, 0.1) 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 5px solid #ffd700;
+            transition: transform 0.3s ease;
+        }
+
+        .philosophy-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+        }
+
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .concept-card {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .concept-card:hover {
+            transform: translateY(-10px);
+            border-color: #ffd700;
+            background: rgba(255, 215, 0, 0.1);
+        }
+
+        .concept-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        /* Elementos interactivos */
+        .interactive-sphere {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #ffd700, #ffed4e, #b8860b);
+            margin: 40px auto;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .interactive-sphere:hover {
+            transform: scale(1.1);
+            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.4);
+        }
+
+        .interactive-sphere::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 40px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+        }
+
+        .quote-box {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+            border-left: 5px solid #ffd700;
+            position: relative;
+            font-style: italic;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .quote-box::before {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            color: #ffd700;
+            opacity: 0.5;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            margin: 40px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #ffd700, #ffed4e);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin: 40px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            width: 45%;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 55%;
+        }
+
+        .timeline-item:hover {
+            background: rgba(255, 215, 0, 0.1);
+            transform: scale(1.05);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ffd700;
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .timeline-item:nth-child(odd)::before {
+            right: -60px;
+        }
+
+        .timeline-item:nth-child(even)::before {
+            left: -60px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.5rem;
+            }
+            
+            .nav-pills {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .concept-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                left: 0 !important;
+            }
+            
+            .timeline::before {
+                left: 20px;
+            }
+            
+            .timeline-item::before {
+                left: 10px !important;
+            }
+        }
+
+        /* Efectos de partículas */
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #ffd700;
+            border-radius: 50%;
+            opacity: 0.7;
         }
     </style>
 </head>
 <body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1 class="title">PARMÉNIDES</h1>
+            <p class="subtitle">El Filósofo del Ser Inmutable</p>
+            <div class="interactive-sphere" onclick="toggleSphere(this)"></div>
+        </div>
 
-<header>
-    <h1>La Filosofía de Parménides</h1>
-    <p>Explorando el Ser y el No-Ser</p>
-</header>
+        <!-- Navegación -->
+        <div class="nav-pills">
+            <div class="nav-pill active" onclick="showSection('biografia')">Biografía</div>
+            <div class="nav-pill" onclick="showSection('conceptos')">Conceptos Clave</div>
+            <div class="nav-pill" onclick="showSection('poema')">El Poema</div>
+            <div class="nav-pill" onclick="showSection('legado')">Legado</div>
+        </div>
 
-<nav>
-    <a href="#ser">El Ser y el No-Ser</a>
-    <a href="#verdad">El Camino de la Verdad</a>
-    <a href="#unidad">La Unidad del Ser</a>
-    <a href="#inmutabilidad">Inmutabilidad e Inmobilidad</a>
-    <a href="#influencia">Influencia y Críticas</a>
-    <a href="#contacto">Contacto</a>
-</nav>
+        <!-- Sección Biografía -->
+        <div id="biografia" class="content-section active">
+            <h2 class="section-title">Biografía y Contexto Histórico</h2>
+            
+            <div class="philosophy-card">
+                <h3>🏛️ Vida y Época (c. 515-450 a.C.)</h3>
+                <p>Parménides de Elea fue un filósofo presocrático nacido en la ciudad de Elea, en la Magna Grecia (actual sur de Italia). Vivió durante el período de transición entre el pensamiento mítico y el racional, siendo considerado el fundador de la ontología occidental.</p>
+            </div>
 
-<div class="main">
-    <section id="ser">
-        <h2>El Ser y el No-Ser</h2>
-        <p>Explicación detallada del concepto de ser y no-ser...</p>
-        <!-- Aquí puedes agregar gráficos interactivos -->
-    </section>
-    <!-- Otras secciones seguirían una estructura similar -->
-</div>
+            <div class="philosophy-card">
+                <h3>🎭 La Escuela Eleática</h3>
+                <p>Fundó la escuela eleática, caracterizada por su enfoque en la razón pura y la lógica. Esta escuela influyó profundamente en filósofos posteriores como Platón y Aristóteles, estableciendo las bases del pensamiento occidental.</p>
+            </div>
 
-<div class="sidebar">
-    <h3>Recursos Adicionales</h3>
-    <ul>
-        <li><a href="#">Artículo Académico</a></li>
-        <li><a href="#">Libro Recomendado</a></li>
-        <li><a href="#">Video Explicativo</a></li>
-    </ul>
-    <button>Compartir en Twitter</button>
-    <button>Compartir en Facebook</button>
-</div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>c. 515 a.C.</h4>
+                    <p>Nacimiento en Elea, colonia griega en el sur de Italia</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>c. 480 a.C.</h4>
+                    <p>Composición de "Sobre la Naturaleza", su obra principal</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>c. 450 a.C.</h4>
+                    <p>Muerte, dejando un legado filosófico revolucionario</p>
+                </div>
+            </div>
+        </div>
 
-<footer id="contacto">
-    <p>Información de contacto: ejemplo@email.com</p>
-    <p>© 2025 Filosofía Antigua</p>
-</footer>
+        <!-- Sección Conceptos Clave -->
+        <div id="conceptos" class="content-section">
+            <h2 class="section-title">Conceptos Fundamentales</h2>
+            
+            <div class="concept-grid">
+                <div class="concept-card" onclick="expandCard(this)">
+                    <span class="concept-icon">🌟</span>
+                    <h3>El Ser</h3>
+                    <p>Para Parménides, el Ser es eterno, inmutable, indivisible y perfecto. Es la única realidad verdadera que puede ser conocida por la razón.</p>
+                </div>
+                
+                <div class="concept-card" onclick="expandCard(this)">
+                    <span class="concept-icon">❌</span>
+                    <h3>El No-Ser</h3>
+                    <p>El No-Ser no existe y no puede ser pensado. Es imposible que algo surja de la nada o se convierta en nada.</p>
+                </div>
+                
+                <div class="concept-card" onclick="expandCard(this)">
+                    <span class="concept-icon">🧠</span>
+                    <h3>Razón vs Sentidos</h3>
+                    <p>La razón es el único camino hacia la verdad, mientras que los sentidos nos engañan con apariencias cambiantes.</p>
+                </div>
+                
+                <div class="concept-card" onclick="expandCard(this)">
+                    <span class="concept-icon">🔄</span>
+                    <h3>Inmutabilidad</h3>
+                    <p>El cambio es una ilusión. La realidad verdadera es estática, eterna e inmóvil.</p>
+                </div>
+            </div>
 
+            <div class="quote-box">
+                El Ser es, y es imposible que no sea. El No-Ser no es, y es necesario que no sea.
+            </div>
+        </div>
+
+        <!-- Sección El Poema -->
+        <div id="poema" class="content-section">
+            <h2 class="section-title">Sobre la Naturaleza</h2>
+            
+            <div class="philosophy-card">
+                <h3>📜 Estructura del Poema</h3>
+                <p>Su obra principal, "Sobre la Naturaleza" (Περὶ φύσεως), es un poema filosófico dividido en tres partes principales que nos han llegado fragmentariamente:</p>
+            </div>
+
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <span class="concept-icon">🚪</span>
+                    <h3>El Proemio</h3>
+                    <p>Descripción alegórica del viaje hacia la verdad, guiado por una diosa que revela los secretos del conocimiento.</p>
+                </div>
+                
+                <div class="concept-card">
+                    <span class="concept-icon">✨</span>
+                    <h3>La Vía de la Verdad</h3>
+                    <p>Exposición de la doctrina del Ser: lo que es, es; lo que no es, no es. Demostración lógica de las características del Ser.</p>
+                </div>
+                
+                <div class="concept-card">
+                    <span class="concept-icon">🌫️</span>
+                    <h3>La Vía de la Opinión</h3>
+                    <p>Crítica del mundo sensible y las opiniones mortales. Explicación de por qué los sentidos nos engañan.</p>
+                </div>
+            </div>
+
+            <div class="philosophy-card">
+                <h3>🎯 Argumentos Principales</h3>
+                <p><strong>1. Principio de No-Contradicción:</strong> Es imposible que algo sea y no sea al mismo tiempo.</p>
+                <p><strong>2. Eternidad del Ser:</strong> El Ser no puede haber comenzado ni puede acabar, porque entonces habría un momento en que no era.</p>
+                <p><strong>3. Unidad del Ser:</strong> No puede haber multiplicidad real, porque eso implicaría separación por el No-Ser.</p>
+                <p><strong>4. Inmutabilidad:</strong> El cambio requiere movimiento hacia lo que no es, lo cual es imposible.</p>
+            </div>
+        </div>
+
+        <!-- Sección Legado -->
+        <div id="legado" class="content-section">
+            <h2 class="section-title">Legado e Influencia</h2>
+            
+            <div class="philosophy-card">
+                <h3>🏛️ Influencia en Platón</h3>
+                <p>Platón incorporó la distinción parmenídea entre el mundo inteligible (verdadero) y el mundo sensible (aparente) en su Teoría de las Ideas. El mundo de las Ideas platónico refleja las características del Ser parmenídeo: eterno, inmutable y perfecto.</p>
+            </div>
+
+            <div class="philosophy-card">
+                <h3>📚 Impacto en Aristóteles</h3>
+                <p>Aunque Aristóteles criticó el monismo de Parménides, adoptó su rigor lógico y su énfasis en el principio de no-contradicción como fundamento de toda ciencia.</p>
+            </div>
+
+            <div class="philosophy-card">
+                <h3>🔬 Filosofía Moderna</h3>
+                <p>El racionalismo de Descartes, Spinoza y Leibniz tiene raíces parmenídeas. La búsqueda de verdades necesarias y eternas a través de la razón pura es herencia directa del eleático.</p>
+            </div>
+
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <span class="concept-icon">🎯</span>
+                    <h3>Ontología</h3>
+                    <p>Creó la ontología como disciplina filosófica: el estudio del ser en cuanto ser.</p>
+                </div>
+                
+                <div class="concept-card">
+                    <span class="concept-icon">🧮</span>
+                    <h3>Lógica</h3>
+                    <p>Estableció principios lógicos fundamentales que siguen siendo válidos hoy.</p>
+                </div>
+                
+                <div class="concept-card">
+                    <span class="concept-icon">🔍</span>
+                    <h3>Epistemología</h3>
+                    <p>Distinguió entre tipos de conocimiento: racional vs. sensorial.</p>
+                </div>
+                
+                <div class="concept-card">
+                    <span class="concept-icon">🌌</span>
+                    <h3>Metafísica</h3>
+                    <p>Planteó preguntas fundamentales sobre la naturaleza de la realidad.</p>
+                </div>
+            </div>
+
+            <div class="quote-box">
+                Nunca se demostrará que las cosas que no son, son; aparta tu pensamiento de esta vía de investigación.
+            </div>
+        </div>
+    </div>
+
+    <!-- Partículas de fondo -->
+    <div id="particles"></div>
+
+    <script>
+        // Funciones de navegación
+        function showSection(sectionId) {
+            // Ocultar todas las secciones
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            // Mostrar la sección seleccionada
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Actualizar navegación
+            const pills = document.querySelectorAll('.nav-pill');
+            pills.forEach(pill => pill.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        // Función para la esfera interactiva
+        function toggleSphere(sphere) {
+            sphere.style.transform = sphere.style.transform === 'scale(1.2) rotate(360deg)' 
+                ? 'scale(1) rotate(0deg)' 
+                : 'scale(1.2) rotate(360deg)';
+        }
+
+        // Función para expandir tarjetas
+        function expandCard(card) {
+            if (card.style.transform === 'scale(1.1)') {
+                card.style.transform = 'scale(1)';
+                card.style.zIndex = '1';
+            } else {
+                card.style.transform = 'scale(1.1)';
+                card.style.zIndex = '10';
+            }
+        }
+
+        // Generar partículas de fondo
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Inicializar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+        });
+
+        // Efectos de hover para mejorar la interactividad
+        document.querySelectorAll('.concept-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.05)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                if (this.style.transform !== 'scale(1.1)') {
+                    this.style.transform = 'translateY(0) scale(1)';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
